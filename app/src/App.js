@@ -1,40 +1,64 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Header from './components/header';
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import NotFound from './views/NotFound'
+import Category from './views/Category';
+import Login from './views/Login';
+import Footer from './components/footer';
+import Register from './views/Register';
+import Home from './views/Home';
+import { ToastContainer } from 'react-toastify'
+import { UserProvider } from './components/contexts/user-context';
+import ArticleForm from './views/CreateArticle';
+import CategoryForm from './views/CreateCategory'
 
 class App extends Component {
   constructor(props) {
     super(props)
-    this.getArticle = this.getArticle.bind(this)
+
+    this.state = {
+      user: {
+        isLoggedIn: localStorage.getItem("auth_token") !== null,
+        isAdmin: localStorage.getItem('isAdmin'),
+        username: localStorage.getItem('username') || '',
+        updateUser: this.updateUser
+      }
+    }
   }
 
-  getArticle(e) {
-    e.preventDefault()
-    console.log(this.props.match.params)
-    let variable = this.props.match.params.nqkakvoid
-    return fetch(`http://localhost:9999/feed/article/${variable}`).then(res => res.json()).then(body => console.log(body.article))
-      
+  updateUser = (user) => {
+
+    this.setState({
+      user
+    })
+
+    console.log(this.state)
   }
 
   render() {
     return (
-      <form onSubmit={(e) => { e.preventDefault(); this.props.history.push(`/article/${this.props.match.params.nqkakvoid}`); console.log('did') }}>
-        <input id="name" />
-        <button onClick={(e) => this.getArticle(e)}>Get</button>
-        <button type="submit">Submit</button>
-      </form>
+      <BrowserRouter>
+        <React.Fragment>
+          <UserProvider value={{ user: this.state.user, updateUser: this.updateUser }}>
+            <Header />
+            <ToastContainer />
+            <Switch>
+              <Route path="/" component={Home} exact />
+              <Route path="/category/:name" component={Category} exact />
+              <Route path="/login" component={Login} exact />
+              <Route path="/register" component={Register} exact />
+              <Route path="/news/send" component={ArticleForm} exact />
+              <Route path="/add/category" component={CategoryForm} exact />
+              <Route component={NotFound} />
+            </Switch>
+            <Footer />
+          </UserProvider>
+        </React.Fragment>
+      </BrowserRouter>
     )
   }
 
-  async componentDidMount() {
-    // console.log(`https://swapi.co/api/${this.props.match.params.nqkakvoid}`)
-    // fetch(`https://swapi.co/api/${this.props.match.params.nqkakvoid}`, {
-    //   mode: 'no-cors'
-    // }).then(res => res.json())
-    //   .then(body => body.results)
-  }
-
-  
 }
 
 export default App;

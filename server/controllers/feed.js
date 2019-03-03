@@ -98,6 +98,24 @@ module.exports = {
 			}
 			next(error);
 		}
+	},
+	getArticlesByCategory: async(req,res,next) => {
+		try {
+			let name = req.params.name
+			let category = await Category.find({name: name}).populate('articles')
+			if(category.length){
+				res.status(200).json({message: 'Category fetched successfully',articles: category[0].articles})
+			}
+			else {
+				res.status(404).json({message: 'No such category', error: true})
+			}
+			
+		} catch (error) {
+			if (!error.statusCode) {
+				error.statusCode = 500;
+			}
+			next(error);
+		}
 	}
 
 }

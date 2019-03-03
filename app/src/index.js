@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route } from 'react-router-dom'
 import './index.css';
+import 'bootstrap/dist/css/bootstrap.css';
 import App from './App';
-import * as serviceWorker from './serviceWorker';
+import 'react-toastify/dist/ReactToastify.min.css'
+
 
 ReactDOM.render(
-    <BrowserRouter>
-        <Route path="/article/:nqkakvoid" component={App} />
-    </BrowserRouter>
+
+    <App />
     , document.getElementById('root')
 );
