@@ -116,6 +116,33 @@ module.exports = {
 			}
 			next(error);
 		}
+	},
+	categoryRename: async (req,res,next) => {
+		try {
+			let id = req.params.id;
+			let category = await Category.findById(id);
+			category.name = req.body.newName;
+			await category.save()
+			res.status(200).json({message: 'Category renamed successfully!', category})
+			
+		} catch (error) {
+			if (!error.statusCode) {
+				error.statusCode = 500;
+			}
+			next(error);
+		}
+	},
+	deleteCategory: async (req,res,next) => {
+		try {
+			let id = req.params.id;
+			await Category.findByIdAndRemove(id);
+			res.status(200).json({message: 'Category deleted successfully!', category: "deleted"})
+		} catch (error) {
+			if (!error.statusCode) {
+				error.statusCode = 500;
+			}
+			next(error);
+		}
 	}
 
 }

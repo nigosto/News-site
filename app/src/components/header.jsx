@@ -64,7 +64,7 @@ class Header extends React.Component {
                                             {
                                                 isAdmin === "true" ? (
                                                     <li className="nav-item">
-                                                        <NavLink className="nav-link" to="/add/category" exact>Add Category</NavLink>
+                                                        <NavLink className="nav-link" to="/manage/category" exact>Manage Categories</NavLink>
                                                     </li>
                                                 ) : (
                                                         <li className="nav-item">

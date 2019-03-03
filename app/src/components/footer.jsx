@@ -2,7 +2,7 @@ import React from 'react'
 
 const Footer = () => {
         return (
-            <footer className="bg-info footer">
+            <footer className="bg-info footer mt-4">
                 <div className="container ">
                     <ul className="list-unstyled list-inline text-center">
                         <li className="list-inline-item ">
@@ -33,7 +33,7 @@ const Footer = () => {
                         
                     </ul>
                 </div>
-                <div className="footer-copyright text-center">© 2018 Copyright: GeorgiAtansov15
+                <div className="footer-copyright text-center text-white">© 2019 Copyright: GeorgiAtansov15
                 </div>
             </footer>
 

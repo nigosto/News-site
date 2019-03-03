@@ -30,7 +30,6 @@ class Login extends Component {
         let result = await data.json()
         if(!result.username){
             toast.error(result.message, {
-                closeButton: false,
                 hideProgressBar: true
               })
         }else{
