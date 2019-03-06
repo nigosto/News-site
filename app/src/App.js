@@ -10,7 +10,7 @@ import Register from './views/Register';
 import Home from './views/Home';
 import { ToastContainer } from 'react-toastify'
 import { UserProvider } from './components/contexts/user-context';
-import ArticleForm from './views/CreateArticle';
+import CreateArticle from './views/CreateArticle';
 import CategoryManagePage from './views/CreateCategory'
 
 class App extends Component {
@@ -48,7 +48,7 @@ class App extends Component {
               <Route path="/category/:name" component={Category} exact />
               <Route path="/login" component={Login} exact />
               <Route path="/register" component={Register} exact />
-              <Route path="/news/send" component={ArticleForm} exact />
+              <Route path="/news/send" component={CreateArticle} exact />
               <Route path="/manage/category" component={CategoryManagePage} exact />
               <Route component={NotFound} />
             </Switch>

@@ -14,7 +14,7 @@ class Header extends React.Component {
 
     render() {
         const { isAdmin, isLoggedIn, username } = this.props;
-        console.log(isAdmin)
+        //console.log(isAdmin)
 
         return (
             <React.Fragment>
@@ -58,7 +58,7 @@ class Header extends React.Component {
                                         <React.Fragment>
                                             <li className="nav-item">
                                                 <a className="navbar-text" style={{ color: 'white' }}>
-                                                    Welocome, {username}
+                                                    Welcome, {username}
                                                 </a>
                                             </li>
                                             {
@@ -97,6 +97,16 @@ class Header extends React.Component {
     }
 
     async componentDidMount() {
+        let categoriesRequest = await fetch("http://localhost:9999/feed/category/all")
+        let categoriesAsJson = await categoriesRequest.json()
+        let categories = await categoriesAsJson.categories
+
+        this.setState({
+            categories
+        })
+    }
+
+    async componentDidUpdate() {
         let categoriesRequest = await fetch("http://localhost:9999/feed/category/all")
         let categoriesAsJson = await categoriesRequest.json()
         let categories = await categoriesAsJson.categories

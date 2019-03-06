@@ -8,43 +8,28 @@ export default class SimpleSlider extends Component {
 
 
     render() {
+        console.log(this.props.recent)
         return (
-
+                <div  className="pt-2 pl-2 pr-2 pb-2" style={{border: "1px solid black"}}>
                 <Carousel interval={3000} pauseOnHover={false}>
-                    <Carousel.Item>
+                {
+                    this.props.recent.length ?
+                    this.props.recent.map(article => (
+                        <Carousel.Item key={article._id}>
                         <img
                             className="d-block w-100 img"
-                            src="http://jewel1067.com/wp-content/uploads/news.jpg"
-                            alt="First slide"
+                            src={article.image}
+                            alt={article.title}
                         />
                         <Carousel.Caption style={{backgroundColor: '#404040', width: '70%'}}>
-                            <h3>First slide label</h3>
+                            <h3>{article.title}</h3>
                         </Carousel.Caption>
                     </Carousel.Item>
-                    <Carousel.Item>
-                        <img
-                            className="d-block w-100 img"
-                            src="http://jewel1067.com/wp-content/uploads/news.jpg"
-                            alt="Third slide"
-                        />
-
-                        <Carousel.Caption style={{backgroundColor: '#404040', width: '70%'}}>
-                            <h3>Second slide label</h3>
-                        </Carousel.Caption>
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <img
-                            className="d-block w-100 img"
-                            src="https://ichef.bbci.co.uk/news/640/media/images/48351000/gif/_48351569_640x360-news.gif"
-                            alt="Third slide"
-                        />
-
-                        <Carousel.Caption style={{backgroundColor: '#404040', width: '70%'}}>
-                            <h3>Third slide label</h3>
-                        </Carousel.Caption>
-                    </Carousel.Item>
-                </Carousel>
+                    )) : null
+                }
                 
+                </Carousel>
+                </div>
         );
     }
 }

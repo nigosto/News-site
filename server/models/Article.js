@@ -45,6 +45,11 @@ const articleSchema = new Schema(
             type: Schema.Types.Boolean,
             default: false,
             required: true
+        },
+        creationDate: {
+            type: Schema.Types.Date,
+            default: Date.now(),
+            required: true
         }
     }
 )

@@ -35,7 +35,10 @@ class Category extends Component {
                 {
                     this.state.articles.length ?
                         this.state.articles.map(article => (
+                            <div>
                             <p>{article.title}</p>
+                            <img src={article.image} />
+                            </div>
                         )) : null
                 }
             </div>

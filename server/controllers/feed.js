@@ -2,6 +2,8 @@ const Article = require('../models/Article')
 const Comment = require('../models/Comment')
 const Category = require('../models/Category')
 const User = require('../models/User')
+const fs = require('fs')
+const nanoid = require('nanoid')
 
 module.exports = {
 	createCategory: async (req, res, next) => {
@@ -36,21 +38,28 @@ module.exports = {
 	},
 	articleCreate: async (req, res, next) => {
 		try {
-			const { title, image, bodyText, video, category, author } = req.body;
+			const { title, image, information, video, category, author } = req.body;
 
+			const id = nanoid()
+			
+
+			let user = await User.find({username: author});
+			//console.log(user[0])
 			let article = await Article.create({
 				title,
-				image,
-				bodyText,
+				image: "http://" + req.hostname + ":9999/content/images/" + id + ".jpg",
+				bodyText: information,
 				video,
 				category,
-				author,
+				author: user[0]._id,
 				comments: []
 			})
 
-			let user = await User.findById(author);
-			user.articles.push(article._id)
-			await user.save()
+			//console.log(`${process.cwd()}/content/images/${id}`)
+			fs.writeFileSync(`${process.cwd()}/content/images/${id}.jpg`,image.split(';base64,').pop(),{encoding: "base64"});
+			
+			user[0].articles.push(article._id)
+			await user[0].save()
 
 			let categoryInBase = await Category.findById(category);
 			categoryInBase.articles.push(article._id)
@@ -59,9 +68,7 @@ module.exports = {
 			res.status(200).json({ message: 'Article created successfully!', article })
 
 		} catch (error) {
-			if (!error.statusCode) {
-				error.statusCode = 500;
-			}
+			console.log(error)
 			next(error);
 		}
 	},
@@ -135,7 +142,19 @@ module.exports = {
 	deleteCategory: async (req,res,next) => {
 		try {
 			let id = req.params.id;
-			await Category.findByIdAndRemove(id);
+
+			let category = await Category.findById(id);
+			category.articles.forEach(async (a) => {
+				let article = await Article.findById(a);
+
+				let author = await User.findByIdAndUpdate(article.author , {$pullAll: {articles: [article._id]}}, {safe: true, multi: true})
+
+				let path = article.image.substring(21);
+				await fs.unlinkSync(`./${path}`)
+				
+				await article.remove()
+			});
+			await category.remove()
 			res.status(200).json({message: 'Category deleted successfully!', category: "deleted"})
 		} catch (error) {
 			if (!error.statusCode) {
