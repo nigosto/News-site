@@ -28,14 +28,6 @@ const articleSchema = new Schema(
             type: Schema.Types.ObjectId,
             ref: 'Comment'
         }],
-        likes: {
-            type: Schema.Types.Number,
-            default: 0
-        },
-        dislikes: {
-            type: Schema.Types.Number,
-            default: 0
-        },
         category: {
             type: Schema.Types.ObjectId,
             ref: 'Category',

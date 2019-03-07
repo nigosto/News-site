@@ -1,5 +1,5 @@
 import React, { Component,  } from 'react'
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 
 class Category extends Component {
     constructor(props) {
@@ -31,15 +31,24 @@ class Category extends Component {
         }
 
         return (
-            <div className="site-content">
+            <div className="site-content container">
+            <h1 className="mt-2">{this.props.match.params.name}</h1>
                 {
                     this.state.articles.length ?
                         this.state.articles.map(article => (
-                            <div>
-                            <p>{article.title}</p>
-                            <img src={article.image} />
-                            </div>
-                        )) : null
+                            <div className="row mt-4" style={{border: "1px solid black"}}>
+                                <div className="col-sm-4 pt-2 pb-2">
+                                    <img className="w-100"
+                                        style={{ height: "200px" }}
+                                        src={article.image}
+                                        alt={article.title}/>
+                                </div>
+                                <div className="col-sm-8">
+                                    <h4>{article.title}</h4>
+                                    <p className="text-justify">{article.bodyText.split(' ').slice(0,80).join(' ')}...<br /><Link to={`/news/details/${article._id}`}>Read more</Link></p>
+                                </div>
+                            </div>    
+                        )) : <p className="h3">No news in this category</p>
                 }
             </div>
         )

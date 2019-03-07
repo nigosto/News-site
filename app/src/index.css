@@ -43,10 +43,17 @@ body, #root {
 
 .img {
   position: relative;
-  float: left;
-  width:  500px;
+  float: left;  
   height: 400px;
   background-position: 50% 50%;
   background-repeat:   no-repeat;
   background-size:     cover;
+}
+
+.img-center {
+  display: block;
+  margin-left: auto; 
+  margin-right: auto;
+  width:  50%;
+  height: 300px;
 }

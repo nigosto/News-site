@@ -1,6 +1,6 @@
 import React, { Component, } from 'react'
 import Carousel from '../components/carousel';
-
+import {Link} from 'react-router-dom'
 
 class Home extends Component {
     constructor(props) {
@@ -21,9 +21,9 @@ class Home extends Component {
                 <div className="row">
                     <div className="col-sm-8" >
                         <h1>Recent</h1>
-                        <Carousel recent={this.state.recent} />
+                        <Carousel {...this.props} recent={this.state.recent} />
                     </div>
-                    <div className="col-sm-4">
+                    <div className="col-sm-4" style={{height: "400px"}}>
                         <h1>Popular</h1>
                         {
                             popular ?
@@ -35,7 +35,7 @@ class Home extends Component {
                                             alt={popular.title} />
                                         <h4>{popular.title}</h4>
                                         <p>{text}...<br />
-                                        <a href="#">Read more</a></p> 
+                                        <Link to={`/news/details/${popular._id}`}>Read more</Link></p> 
                                     </div>
                                 ) : null
                         }
@@ -56,7 +56,7 @@ class Home extends Component {
                                 </div>
                                 <div className="col-sm-8">
                                     <h4>{article.title}</h4>
-                                    <p className="text-justify">{article.bodyText.split(' ').slice(0,80).join(' ')}...<br /><a href="#">Read more</a></p>
+                                    <p className="text-justify">{article.bodyText.split(' ').slice(0,80).join(' ')}...<br /><Link to={`/news/details/${article._id}`}>Read more</Link></p>
                                 </div>
                             </div>    
                         )): null

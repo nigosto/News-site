@@ -74,7 +74,7 @@ module.exports = {
 	},
 	articleGet: async (req, res, next) => {
 		try {
-			let articles = await Article.find()
+			let articles = await Article.find()  
 
 			res.status(200).json({ message: 'Articles fetched successfully', articles })
 		} catch (error) {
@@ -96,8 +96,8 @@ module.exports = {
 	},
 	getArticle: async(req,res,next) => {
 		try {
-			let article = await Article.findById(req.params.id)
-			
+			let article = await Article.findById(req.params.id).populate('author')
+
 			res.status(200).json({ message: 'Article fetched successfully', article })
 		} catch (error) {
 			if (!error.statusCode) {

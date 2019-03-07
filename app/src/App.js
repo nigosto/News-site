@@ -12,6 +12,7 @@ import { ToastContainer } from 'react-toastify'
 import { UserProvider } from './components/contexts/user-context';
 import CreateArticle from './views/CreateArticle';
 import CategoryManagePage from './views/CreateCategory'
+import News from './views/News';
 
 class App extends Component {
   constructor(props) {
@@ -44,12 +45,13 @@ class App extends Component {
             <Header />
             <ToastContainer />
             <Switch>
-              <Route path="/" component={Home} exact />
+              <Route path="/" render={props => <Home {...props} />} exact />
               <Route path="/category/:name" component={Category} exact />
               <Route path="/login" component={Login} exact />
               <Route path="/register" component={Register} exact />
               <Route path="/news/send" component={CreateArticle} exact />
               <Route path="/manage/category" component={CategoryManagePage} exact />
+              <Route path="/news/details/:id" component={News} exact />
               <Route component={NotFound} />
             </Switch>
             <Footer />
