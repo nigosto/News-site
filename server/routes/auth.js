@@ -5,7 +5,6 @@ const User = require('../models/User');
 
 router.post('/signup',
   [
-    // TODO: Add normalize email and check
     body('email')
       .isEmail()
       .withMessage('Please, enter a valid email.')
@@ -19,22 +18,22 @@ router.post('/signup',
     body('password')
       .trim()
       .isLength({ min: 4 })
-      .withMessage('Please, enter a valid password.'),
+      .withMessage('A password should contain at least 4 numbers or letters'),
     body('username')
       .trim()
       .not()
       .isEmpty()
-      .withMessage('Please, enter a valid username.'),
+      .withMessage('Please, enter username.'),
     body('firstName')
       .trim()
       .not()
       .isEmpty()
-      .withMessage('Please, enter a valid first name.'),
-    body('firstName')
+      .withMessage('Please, enter first name.'),
+    body('lastName')
       .trim()
       .not()
       .isEmpty()
-      .withMessage('Please, enter a valid first name.')
+      .withMessage('Please, enter last name.')
   ]
   , authController.signUp);
 router.post('/signin', authController.signIn);

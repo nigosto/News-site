@@ -41,13 +41,15 @@ class Login extends Component {
               localStorage.setItem('isAdmin', result.isAdmin)
               localStorage.setItem('auth_token', result.token)
               localStorage.setItem('username', result.username)
+              localStorage.setItem('userId', result.userId)
 
               const {updateUser} = this.props
               console.log(result.isAdmin)
               updateUser({
                 isAdmin: localStorage.getItem('isAdmin'),
                 isLoggedIn: true,
-                username: result.username
+                username: result.username,
+                userId: result.userId
             })
         }
         
@@ -93,13 +95,13 @@ class Login extends Component {
                 </div>
                 <div className="col-md-7">
                 <div id="right-header">
-                    <h1 >Why Should You Sign In</h1>
+                    <h1 >Why Should You Log In?</h1>
                     </div>
                     <div id="right-paragraph">
-                        <p className="text-justify h4 font-weight-lighter">You get a lot of privileges when Signing in! Having an account lets you write and send news to our redactors!
+                        <p className="text-justify h4 font-weight-lighter">You get a lot of privileges when Logging in! Having an account lets you write and send news to our redactors!
                             If they approve that what you sent them is accurate you might see your own news in the site! What is more 
                             being an authorized user you will be able to post comments under other journalists' news and leave either a 
-                            like or dislike! So, what are you waiting for? Sign in NOW!
+                            like or dislike! So, what are you waiting for? Log in NOW!
                         </p>
                     </div>
                 </div>

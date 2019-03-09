@@ -29,9 +29,6 @@ class Header extends React.Component {
                             <li className="nav-item">
                                 <NavLink className="nav-link" to="/" exact>Home </NavLink>
                             </li>
-                            <li className="nav-item">
-                                <NavLink className="nav-link" to="/aaa" exact>Link</NavLink>
-                            </li>
 
                             <NavDropdown title="Categories" id="basic-nav-dropdown" >
                                 {
@@ -46,30 +43,36 @@ class Header extends React.Component {
                         </ul>
 
                         <ul className="navbar-nav mr-2" >
-                            <li className="nav-item">
-                                <form className="form-inline mr-3 my-2 my-lg-0">
-                                    <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-                                    <button className="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
-                                </form>
-                            </li>
+
                             {
                                 isLoggedIn ?
                                     (
                                         <React.Fragment>
                                             <li className="nav-item">
-                                                <a className="navbar-text" style={{ color: 'white' }}>
+                                                <a className="navbar-text mr-2" style={{ color: 'white' }}>
                                                     Welcome, {username}
                                                 </a>
                                             </li>
+
                                             {
                                                 isAdmin === "true" ? (
-                                                    <li className="nav-item">
-                                                        <NavLink className="nav-link" to="/manage/category" exact>Manage Categories</NavLink>
-                                                    </li>
-                                                ) : (
+                                                    <React.Fragment>
                                                         <li className="nav-item">
-                                                            <NavLink className="nav-link" to="/news/send" exact>Send News</NavLink>
+                                                            <NavLink className="nav-link" to="/manage/category" exact>Manage Categories</NavLink>
                                                         </li>
+                                                        <li className="nav-item">
+                                                            <NavLink className="nav-link" to="/news/approve" exact>Approve News</NavLink>
+                                                        </li>
+                                                    </React.Fragment>
+                                                ) : (
+                                                        <React.Fragment>
+                                                            <li className="nav-item">
+                                                                <NavLink className="nav-link" to="/news/send" exact>Send News</NavLink>
+                                                            </li>
+                                                            <li className="nav-item">
+                                                                <NavLink className="nav-link" to={`/user/profile/${username}`} exact>View Profile</NavLink>
+                                                            </li>
+                                                        </React.Fragment>
                                                     )
                                             }
                                             <li className="nav-item">

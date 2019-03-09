@@ -15,7 +15,8 @@ class Register extends Component {
             username: '',
             firstName: '',
             lastName: '',
-            password: ''
+            password: '',
+            errors: []
         }
 
         this.handleChange = this.handleChange.bind(this)
@@ -34,9 +35,9 @@ class Register extends Component {
         })
         let result = await data.json()
         if(!result.username){
-            toast.error(result.message, {
-                hideProgressBar: true
-              })
+            this.setState({
+                errors: result.errors
+            })
         }else{
             toast.success(result.message, {
                 hideProgressBar: true
@@ -46,13 +47,15 @@ class Register extends Component {
               localStorage.setItem('isAdmin', result.isAdmin)
               localStorage.setItem('auth_token', result.token)
               localStorage.setItem('username', result.username)
+              localStorage.setItem('userId', result.userId)
 
               const {updateUser} = this.props
               console.log(result.isAdmin)
               updateUser({
                 isAdmin: localStorage.getItem('isAdmin'),
                 isLoggedIn: true,
-                username: result.username
+                username: result.username,
+                userId: result.userId
             })
         }
         
@@ -72,6 +75,25 @@ class Register extends Component {
             return (
                 <Redirect to="/" />
             )
+        }
+
+        if(this.state.errors.length){
+            this.state.errors.forEach(e => {
+                if(e.msg){
+                    toast.error(e.msg, {
+                        hideProgressBar: true
+                      })
+                }
+                else{
+                toast.error(e,{
+                    hideProgressBar: true
+                })  
+            }
+                this.setState({
+                    errors:[]
+                })
+            });
+            
         }
 
         return (

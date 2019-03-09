@@ -48,7 +48,7 @@ class Category extends Component {
                                     <p className="text-justify">{article.bodyText.split(' ').slice(0,80).join(' ')}...<br /><Link to={`/news/details/${article._id}`}>Read more</Link></p>
                                 </div>
                             </div>    
-                        )) : <p className="h3">No news in this category</p>
+                        )) : <p className="h3 mt-4">No news in this category</p>
                 }
             </div>
         )
@@ -61,7 +61,7 @@ class Category extends Component {
             }, async () => {
                 let categoriesRequest = await fetch(`http://localhost:9999/feed/category/articles/${this.props.match.params.name}`)
                 let articlesAsJson = await categoriesRequest.json()
-                let articles = await articlesAsJson.articles
+                let articles = await articlesAsJson.articles.filter(article => article.isApproved === true)
     
                 if(articlesAsJson.error){
                     this.setState({

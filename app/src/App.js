@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Header from './components/header';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import NotFound from './views/NotFound'
+import NotFound from './views/notFound'
 import Category from './views/Category';
 import Login from './views/Login';
 import Footer from './components/footer';
@@ -13,6 +13,10 @@ import { UserProvider } from './components/contexts/user-context';
 import CreateArticle from './views/CreateArticle';
 import CategoryManagePage from './views/CreateCategory'
 import News from './views/News';
+import ApproveNews from './views/approveNews';
+import Preview from './views/preview'
+import EditNews from './views/editNews'
+import Profile from './views/profile';
 
 class App extends Component {
   constructor(props) {
@@ -23,6 +27,7 @@ class App extends Component {
         isLoggedIn: localStorage.getItem("auth_token") !== null,
         isAdmin: localStorage.getItem('isAdmin'),
         username: localStorage.getItem('username') || '',
+        userId: localStorage.getItem('userId') || '',
         updateUser: this.updateUser
       }
     }
@@ -52,6 +57,10 @@ class App extends Component {
               <Route path="/news/send" component={CreateArticle} exact />
               <Route path="/manage/category" component={CategoryManagePage} exact />
               <Route path="/news/details/:id" component={News} exact />
+              <Route path="/news/approve" component={ApproveNews} exact />
+              <Route path="/news/preview/:id" component={Preview} exact />
+              <Route path="/news/edit/:id" component={EditNews} exact />
+              <Route path="/user/profile/:username" component={Profile}exact />
               <Route component={NotFound} />
             </Switch>
             <Footer />

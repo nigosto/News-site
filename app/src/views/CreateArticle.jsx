@@ -54,15 +54,17 @@ class CreateArticle extends Component {
             let data = await fetch('http://localhost:9999/feed/article/create', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('auth_token')
             },
             body: JSON.stringify(this.state)
         })
         let result = await data.json()
-        if (!result.article) {
-            toast.error("News already exist", {
+        if (result.errors) {
+            result.errors.forEach(e => toast.error(e, {
                 hideProgressBar: true
-            })
+            }))
+            
         }
         else {
             toast.success(result.message, {
@@ -111,10 +113,11 @@ class CreateArticle extends Component {
                                 </div>
                             </div>
                         </Form.Group>
-                        <Form.Group >
+                        {/* <Form.Group >
                             <Form.Label className="h3">Video</Form.Label>
                             <Form.Control onChange={this.handleChange} id="video" placeholder="Enter video address" />
-                        </Form.Group>
+                            <Form.Text className="text-muted">Video is Optional</Form.Text>
+                        </Form.Group> */}
                         <Form.Group >
                             <Form.Label className="h3">Information</Form.Label>
                             <Form.Control onChange={this.handleChange} id="information" as="textarea" rows="3" />
