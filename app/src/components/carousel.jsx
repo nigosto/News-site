@@ -30,16 +30,16 @@ export default class SimpleSlider extends Component {
                 <Carousel interval={3000} pauseOnHover={false}>
                 {
                     this.props.recent.length ?
-                    this.props.recent.map(article => (
-                        <Carousel.Item key={article._id}>
+                    this.props.recent.map(news => (
+                        <Carousel.Item key={news._id}>
                         <img
                             className="d-block w-100 img"
-                            src={article.image}
-                            alt={article.title}
-                            onClick={ (e) => this.handleRedirect(e,`/news/details/${article._id}`)}
+                            src={news.image}
+                            alt={news.title}
+                            onClick={ (e) => this.handleRedirect(e,`/news/details/${news._id}`)}
                         />
                         <Carousel.Caption style={{backgroundColor: '#404040', width: '70%'}}>
-                            <h3>{article.title}</h3>
+                            <h3>{news.title}</h3>
                         </Carousel.Caption>
                     </Carousel.Item>
                     )) : null

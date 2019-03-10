@@ -1,6 +1,7 @@
 import React from 'react'
 import { UserConsumer } from '../components/contexts/user-context'
 import { Redirect, Link } from 'react-router-dom'
+import withUserContext from '../components/hocs/withUserContext'
 
 class Preview extends React.Component {
     constructor(props) {
@@ -127,16 +128,4 @@ class Preview extends React.Component {
     }
 }
 
-const PreviewWithContext = (props) => {
-    return (
-        <UserConsumer>
-            {
-                ({ user }) => (
-                    <Preview  {...props} userId={user.userId} username={user.username} isAdmin={user.isAdmin} isLoggedIn={user.isLoggedIn} />
-                )
-            }
-        </UserConsumer>
-    )
-}
-
-export default PreviewWithContext
+export default withUserContext(Preview)

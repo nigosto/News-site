@@ -1,8 +1,9 @@
 import React from 'react'
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 import { Form, Button } from 'react-bootstrap'
 import { UserConsumer } from '../components/contexts/user-context'
 import { toast } from 'react-toastify'
+import withUserContext from '../components/hocs/withUserContext'
 
 class News extends React.Component {
     constructor(props) {
@@ -126,8 +127,18 @@ class News extends React.Component {
                             <div>
                                 <h1 className="mt-4 text-center mb-3">{news.title}</h1>
                                 <div className="row" style={{ fontSize: "20px" }}>
-                                    <p className="col-sm-4 text-right mt-3" >{`${date}-${month}-${year}`}</p>
-                                    <p className="col-sm-5 text-right mt-3">By: {author.username}</p>
+                                <div className="col-sm-4 text-right mt-3"><p>{`${date}-${month}-${year}`}</p></div>
+                                        <div className="col-sm-4 text-center">
+                                            {
+                                                this.props.isAdmin === "true" ? (
+                                                    <Link className="btn btn-warning btn-lg btn-block" to={`/news/edit/${news._id}`}>Edit</Link>
+                                                ) : null
+                                            }
+
+                                        </div>
+                                        <div className=" col-sm-4 mt-3">
+                                            <p>by {author.username}</p>
+                                        </div>
                                 </div>
                                 <img className="d-block img-center mt-3"
                                     src={news.image}
@@ -195,46 +206,7 @@ class News extends React.Component {
         }
     }
 
-    // async componentDidUpdate() {
-    //     try {
-    //         this.setState({
-    //             isLoading: true
-    //         }, async () => {
-    //             let newsRequest = await fetch(`http://localhost:9999/feed/article/${this.props.match.params.id}`)
-    //             let newsAsJson = await newsRequest.json()
-    //             let news = await newsAsJson.article
-    //             if (!news) {
-    //                 this.setState({
-    //                     error: true
-    //                 })
-    //                 return null
-    //             }
-
-    //             this.setState({
-    //                 news,
-    //                 isLoading: false
-    //             })
-    //         })
-
-    //     } catch (e) {
-    //         this.setState({
-    //             error: true
-    //         })
-    //     }
-    // }
+    
 }
 
-
-const NewsWithContext = (props) => {
-    return (
-        <UserConsumer>
-            {
-                ({ user }) => (
-                    <News  {...props} userId={user.userId} username={user.username} isAdmin={user.isAdmin} isLoggedIn={user.isLoggedIn} />
-                )
-            }
-        </UserConsumer>
-    )
-}
-
-export default NewsWithContext
+export default withUserContext(News)

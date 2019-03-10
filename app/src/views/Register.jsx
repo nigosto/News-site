@@ -4,6 +4,7 @@ import { Form, Button, Col } from 'react-bootstrap'
 import picture from '../news.png'
 import {toast} from 'react-toastify'
 import { UserConsumer} from '../components/contexts/user-context'
+import withUserContext from '../components/hocs/withUserContext'
 
 
 class Register extends Component {
@@ -145,16 +146,4 @@ class Register extends Component {
     }
 }
 
-const RegisterWithContext = (props) => {
-    return (
-        <UserConsumer>
-            {
-                ({user} ) => (
-                    <Register  {...props} isLoggedIn={user.isLoggedIn} updateUser={user.updateUser}/>
-                )
-            }
-        </UserConsumer>
-    )
-}
-
-export default RegisterWithContext
+export default withUserContext(Register)

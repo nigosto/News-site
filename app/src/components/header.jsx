@@ -2,6 +2,7 @@ import React from 'react'
 import { NavDropdown, } from 'react-bootstrap'
 import { NavLink } from 'react-router-dom'
 import { UserConsumer } from './contexts/user-context'
+import withUserContext from './hocs/withUserContext'
 
 class Header extends React.Component {
     constructor(props) {
@@ -37,8 +38,6 @@ class Header extends React.Component {
                                             <NavLink style={{ textDecoration: 'none', color: 'black' }} className="nav-dropdown" to={`/category/${category.name}`} exact key={category._id}>{category.name}</NavLink>
                                         )) : null
                                 }
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
                             </NavDropdown>
                         </ul>
 
@@ -120,16 +119,4 @@ class Header extends React.Component {
     }
 }
 
-const HeaderWithContext = (props) => {
-    return (
-        <UserConsumer>
-            {
-                ({ user }) => (
-                    <Header  {...props} isLoggedIn={user.isLoggedIn} username={user.username} isAdmin={user.isAdmin} />
-                )
-            }
-        </UserConsumer>
-    )
-}
-
-export default HeaderWithContext
+export default withUserContext(Header)

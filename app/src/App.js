@@ -3,16 +3,16 @@ import './App.css';
 import Header from './components/header';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import NotFound from './views/notFound'
-import Category from './views/Category';
-import Login from './views/Login';
+import Category from './views/category';
+import Login from './views/login';
 import Footer from './components/footer';
-import Register from './views/Register';
-import Home from './views/Home';
+import Register from './views/register';
+import Home from './views/home';
 import { ToastContainer } from 'react-toastify'
 import { UserProvider } from './components/contexts/user-context';
-import CreateArticle from './views/CreateArticle';
-import CategoryManagePage from './views/CreateCategory'
-import News from './views/News';
+import CreateNews from './views/createNews';
+import CategoryManagePage from './views/createCategory'
+import News from './views/news';
 import ApproveNews from './views/approveNews';
 import Preview from './views/preview'
 import EditNews from './views/editNews'
@@ -54,7 +54,7 @@ class App extends Component {
               <Route path="/category/:name" component={Category} exact />
               <Route path="/login" component={Login} exact />
               <Route path="/register" component={Register} exact />
-              <Route path="/news/send" component={CreateArticle} exact />
+              <Route path="/news/send" component={CreateNews} exact />
               <Route path="/manage/category" component={CategoryManagePage} exact />
               <Route path="/news/details/:id" component={News} exact />
               <Route path="/news/approve" component={ApproveNews} exact />

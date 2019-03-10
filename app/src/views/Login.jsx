@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import {  Redirect } from 'react-router-dom'
 import { Form, Button } from 'react-bootstrap'
 import {toast} from 'react-toastify'
-import {UserConsumer} from '../components/contexts/user-context'
+import {UserConsumer} from '../components/contexts/user-context';
+import withUserContext from '../components/hocs/withUserContext';
 
 class Login extends Component {
     constructor(props) {
@@ -111,16 +112,5 @@ class Login extends Component {
     }
 }
 
-const LoginWithContext = (props) => {
-    return (
-        <UserConsumer>
-            {
-                ({user} ) => (
-                    <Login  {...props} isLoggedIn={user.isLoggedIn} updateUser={user.updateUser}/>
-                )
-            }
-        </UserConsumer>
-    )
-}
 
-export default LoginWithContext
+export default withUserContext(Login)

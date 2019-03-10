@@ -2,6 +2,7 @@ import React from 'react'
 import { UserConsumer } from '../components/contexts/user-context'
 import { toast } from 'react-toastify'
 import { Redirect, Link } from 'react-router-dom'
+import withUserContext from '../components/hocs/withUserContext'
 
 class Profile extends React.Component {
     constructor(props) {
@@ -45,7 +46,6 @@ class Profile extends React.Component {
 
     render() {
         const { user } = this.state
-        console.log("hi")
         if ((this.props.isLoggedIn === false) || this.props.isAdmin === "true" || this.props.username !== this.props.match.params.username) {
             return (
                 <Redirect to="/login" />
@@ -133,17 +133,4 @@ class Profile extends React.Component {
     
 }
 
-
-const ProfileWithContext = (props) => {
-    return (
-        <UserConsumer>
-            {
-                ({ user }) => (
-                    <Profile  {...props} username={user.username} isAdmin={user.isAdmin} isLoggedIn={user.isLoggedIn} />
-                )
-            }
-        </UserConsumer>
-    )
-}
-
-export default ProfileWithContext;
+export default withUserContext(Profile);

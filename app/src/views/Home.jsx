@@ -87,7 +87,7 @@ class Home extends Component {
                                         <h1>Other news</h1>
                                         {
                                             other.map(article => (
-                                                <div className="row mt-4" style={{ border: "1px solid black" }}>
+                                                <div key={article._id} className="row mt-4" style={{ border: "1px solid black" }}>
                                                     <div className="col-sm-4 pt-2 pb-2">
                                                         <img className="w-100"
                                                             style={{ height: "200px" }}

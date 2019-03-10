@@ -2,6 +2,7 @@ import React from "react"
 import {Link} from 'react-router-dom'
 import { toast } from 'react-toastify'
 import {UserConsumer} from '../components/contexts/user-context'
+import withUserContext from '../components/hocs/withUserContext'
 
 class ApproveNews extends React.Component {
     constructor(props){
@@ -118,16 +119,4 @@ class ApproveNews extends React.Component {
     }
 }
 
-const ApproveNewsWithContext = (props) => {
-    return (
-        <UserConsumer>
-            {
-                ({ user }) => (
-                    <ApproveNews  {...props} username={user.username} isAdmin={user.isAdmin} isLoggedIn={user.isLoggedIn} />
-                )
-            }
-        </UserConsumer>
-    )
-}
-
-export default ApproveNewsWithContext
+export default withUserContext(ApproveNews)

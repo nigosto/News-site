@@ -4,6 +4,7 @@ import { Form, Button } from 'react-bootstrap'
 import CategoryService from '../services/category-service'
 import { toast } from 'react-toastify'
 import { Redirect } from 'react-router-dom'
+import withUserContext from '../components/hocs/withUserContext'
 
 class EditNews extends React.Component {
     constructor(props) {
@@ -130,17 +131,4 @@ class EditNews extends React.Component {
     }
 }
 
-
-const EditNewsPageWithContext = (props) => {
-    return (
-        <UserConsumer>
-            {
-                ({ user }) => (
-                    <EditNews  {...props} userId={user.userId} username={user.username} isAdmin={user.isAdmin} isLoggedIn={user.isLoggedIn} />
-                )
-            }
-        </UserConsumer>
-    )
-}
-
-export default EditNewsPageWithContext
+export default withUserContext(EditNews)

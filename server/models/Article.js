@@ -16,9 +16,6 @@ const articleSchema = new Schema(
             type: Schema.Types.String,
             required: true
         },
-        video: {
-            type: Schema.Types.String
-        },
         author: {
             type: Schema.Types.ObjectId,
             required: true,

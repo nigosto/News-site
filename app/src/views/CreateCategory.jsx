@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { UserConsumer } from '../components/contexts/user-context'
 import { Redirect } from 'react-router-dom'
-import CategoryForm from '../components/category-form';
+import CategoryForm from '../components/categoryForm';
 import { Form, Button } from 'react-bootstrap'
 import { toast } from 'react-toastify'
+import withUserContext from '../components/hocs/withUserContext'
 
 class CategoryManagePage extends Component {
     constructor(props) {
@@ -175,16 +176,4 @@ class CategoryManagePage extends Component {
     }
 }
 
-const CategoryManagePageWithContext = (props) => {
-    return (
-        <UserConsumer>
-            {
-                ({ user }) => (
-                    <CategoryManagePage  {...props} isAdmin={user.isAdmin} />
-                )
-            }
-        </UserConsumer>
-    )
-}
-
-export default CategoryManagePageWithContext
+export default withUserContext(CategoryManagePage)

@@ -4,8 +4,9 @@ import { Redirect } from 'react-router-dom'
 import { Form, Button } from 'react-bootstrap'
 import CategoryService from '../services/category-service'
 import { toast } from 'react-toastify'
+import withUserContext from '../components/hocs/withUserContext'
 
-class CreateArticle extends Component {
+class CreateNews extends Component {
     constructor(props) {
         super(props)
 
@@ -113,11 +114,6 @@ class CreateArticle extends Component {
                                 </div>
                             </div>
                         </Form.Group>
-                        {/* <Form.Group >
-                            <Form.Label className="h3">Video</Form.Label>
-                            <Form.Control onChange={this.handleChange} id="video" placeholder="Enter video address" />
-                            <Form.Text className="text-muted">Video is Optional</Form.Text>
-                        </Form.Group> */}
                         <Form.Group >
                             <Form.Label className="h3">Information</Form.Label>
                             <Form.Control onChange={this.handleChange} id="information" as="textarea" rows="3" />
@@ -143,8 +139,7 @@ class CreateArticle extends Component {
 
     async componentDidMount() {
         try {
-            const categories = await CreateArticle.service.getAllCategories()
-            //console.log(categories)
+            const categories = await CreateNews.service.getAllCategories()
             this.setState({
                 categories
             })
@@ -154,16 +149,4 @@ class CreateArticle extends Component {
     }
 }
 
-const CreateArticleWithContext = (props) => {
-    return (
-        <UserConsumer>
-            {
-                ({ user }) => (
-                    <CreateArticle  {...props} username={user.username} isAdmin={user.isAdmin} isLoggedIn={user.isLoggedIn} />
-                )
-            }
-        </UserConsumer>
-    )
-}
-
-export default CreateArticleWithContext
+export default withUserContext(CreateNews)
