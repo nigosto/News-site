@@ -2,17 +2,17 @@ import React, { Component } from 'react';
 import './App.css';
 import Header from './components/header';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import NotFound from './views/notFound'
-import Category from './views/category';
-import Login from './views/login';
+import NotFound from './views/NotFound'
+import Category from './views/Category';
+import Login from './views/Login';
 import Footer from './components/footer';
-import Register from './views/register';
-import Home from './views/home';
+import Register from './views/Register';
+import Home from './views/Home';
 import { ToastContainer } from 'react-toastify'
 import { UserProvider } from './components/contexts/user-context';
 import CreateNews from './views/createNews';
-import CategoryManagePage from './views/createCategory'
-import News from './views/news';
+import CategoryManagePage from './views/CreateCategory'
+import News from './views/News';
 import ApproveNews from './views/approveNews';
 import Preview from './views/preview'
 import EditNews from './views/editNews'
