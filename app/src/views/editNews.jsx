@@ -65,7 +65,7 @@ class EditNews extends React.Component {
         const { title, information, isAuthor } = this.state
         if(this.state.isLoading){
             return (
-                <span>Loading...</span>
+                <span className="site-content text-center h3">Loading...</span>
             )
         }
         if(this.state.error){

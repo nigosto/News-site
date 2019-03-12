@@ -46,7 +46,7 @@ class Home extends Component {
 
     render() {
         let { popular, other, recent } = this.state
-        let text = popular ? popular.bodyText.split(' ').slice(0, 25).join(' ') : null
+        let text = popular ? popular.bodyText.split(' ').slice(0, 20).join(' ') : null
         return (
             <div className="pt-4 site-content container">
                 {

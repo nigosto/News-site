@@ -33,7 +33,7 @@ const Footer = () => {
                         
                     </ul>
                 </div>
-                <div className="footer-copyright text-center text-white">© 2019 Copyright: GeorgiAtansov15
+                <div className="footer-copyright text-center text-white">© 2019 Copyright: GeorgiAtanasov15
                 </div>
             </footer>
 

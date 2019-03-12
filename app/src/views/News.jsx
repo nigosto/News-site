@@ -97,7 +97,7 @@ class News extends React.Component {
 
         if (this.state.isLoading) {
             return (
-                <span>Loading...</span>
+                <span className="site-content text-center h3">Loading...</span>
             )
         }
 
@@ -164,11 +164,12 @@ class News extends React.Component {
                 }
 
                 <div className="mt-5">
-                    <h1>Comments</h1>
+                    <h1 className="pt-4 pb-3" style={{ borderTop: "1px solid black" }}>Comments</h1>
+                    
                     {
                         news.comments.length ?
-                            news.comments.map(c => (
-                                <div className="mt-5" >
+                            news.comments.reverse().map(c => (
+                                <div className="mb-5" >
                                     <p style={{ fontSize: 23 }} className="mt-3"><span className="h4 mr-3">{c.author.username} ({c.author.firstName} {c.author.lastName}):</span> {c.bodyText}</p>
                                 </div>
                             )) : <span>No comments</span>

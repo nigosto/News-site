@@ -89,10 +89,12 @@ module.exports = {
 			categoryInBase.articles.push(article._id)
 			await categoryInBase.save()
 
-			res.status(200).json({ message: 'Article sent successfully!', article })
+			res.status(200).json({ message: 'News sent successfully!', article })
 
 		} catch (error) {
-			console.log(error)
+			if (!error.statusCode) {
+				error.statusCode = 500;
+			}
 			next(error);
 		}
 	},
@@ -259,7 +261,7 @@ module.exports = {
 
 			await article.remove()
 
-			res.status(200).json({ message: 'Article deleted successfully!', news: "deleted" })
+			res.status(200).json({ message: 'News deleted successfully!', news: "deleted" })
 		} catch (error) {
 			if (!error.statusCode) {
 				error.statusCode = 500;

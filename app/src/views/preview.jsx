@@ -23,7 +23,7 @@ class Preview extends React.Component {
 
         if (this.state.isLoading) {
             return (
-                <span>Loading...</span>
+                <span className="site-content text-center h3">Loading...</span>
             )
         }
 
